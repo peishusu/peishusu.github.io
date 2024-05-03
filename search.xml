@@ -21,7 +21,7 @@
       <link href="/posts/d87f7e0c.html"/>
       <url>/posts/d87f7e0c.html</url>
       
-        <content type="html"><![CDATA[<p>test</p>]]></content>
+        <content type="html"><![CDATA[<p>test</p><h1 id="1、这是第一个标题"><a href="#1、这是第一个标题" class="headerlink" title="1、这是第一个标题"></a>1、这是第一个标题</h1>]]></content>
       
       
       <categories>
@@ -30,6 +30,14 @@
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> STM32 </tag>
+            
+            <tag> STM345 </tag>
+            
+        </tags>
       
     </entry>
     
