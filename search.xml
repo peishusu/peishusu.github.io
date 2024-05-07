@@ -4,11 +4,67 @@
   
     
     <entry>
+      <title>docker安装常用的软件</title>
+      <link href="/posts/ffabeda8.html"/>
+      <url>/posts/ffabeda8.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      <categories>
+          
+          <category> docker </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> docker </tag>
+            
+            <tag> 微服务生态 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>计算机网络--HTTP</title>
+      <link href="/posts/9610dfa.html"/>
+      <url>/posts/9610dfa.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="HTTP的基本概念"><a href="#HTTP的基本概念" class="headerlink" title="HTTP的基本概念"></a>HTTP的基本概念</h1><h2 id="是什么？"><a href="#是什么？" class="headerlink" title="是什么？"></a>是什么？</h2><p>超文本传输协议</p><h2 id="状态码有哪些？"><a href="#状态码有哪些？" class="headerlink" title="状态码有哪些？"></a>状态码有哪些？</h2><img src="/posts/undefined/image-20240506144111577.png" class title="五大类HTTP状态码"><p><code>1xx</code> 类状态码属于<strong>提示信息</strong>，是协议处理中的一种中间状态，实际用到的比较少。</p><p><code>2xx</code> 类状态码表示服务器<strong>成功</strong>处理了客户端的请求，也是我们最愿意看到的状态。</p><ul><li>「<strong>200 OK</strong>」是最常见的成功状态码，表示一切正常。如果是非 <code>HEAD</code> 请求，服务器返回的响应头都会有 body 数据。</li><li>「<strong>204 No Content</strong>」也是常见的成功状态码，与 200 OK 基本相同，但响应头没有 body 数据。</li><li>「<strong>206 Partial Content</strong>」是应用于 HTTP 分块下载或断点续传，表示响应返回的 body 数据并不是资源的全部，而是其中的一部分，也是服务器处理成功的状态。</li></ul><p><code>3xx</code> 类状态码表示客户端请求的资源发生了变动，需要客户端用新的 URL 重新发送请求获取资源，也就是<strong>重定向</strong>。</p><ul><li>「<strong>301 Moved Permanently</strong>」表示永久重定向，说明请求的资源已经不存在了，需改用新的 URL 再次访问。</li><li>「<strong>302 Found</strong>」表示临时重定向，说明请求的资源还在，但暂时需要用另一个 URL 来访问。</li></ul><p>301 和 302 都会在响应头里使用字段 <code>Location</code>，指明后续要跳转的 URL，浏览器会自动重定向新的 URL。</p><ul><li>「<strong>304 Not Modified</strong>」不具有跳转的含义，表示资源未修改，重定向已存在的缓冲文件，也称缓存重定向，也就是告诉客户端可以继续使用缓存资源，用于缓存控制。</li></ul><p><code>4xx</code> 类状态码表示客户端发送的<strong>报文有误</strong>，服务器无法处理，也就是错误码的含义。</p><ul><li>「<strong>400 Bad Request</strong>」表示客户端请求的报文有错误，但只是个笼统的错误。</li><li>「<strong>403 Forbidden</strong>」表示服务器禁止访问资源，并不是客户端的请求出错。</li><li>「<strong>404 Not Found</strong>」表示请求的资源在服务器上不存在或未找到，所以无法提供给客户端。</li></ul><p><code>5xx</code> 类状态码表示客户端请求报文正确，但是<strong>服务器处理时内部发生了错误</strong>，属于服务器端的错误码。</p><ul><li>「<strong>500 Internal Server Error</strong>」与 400 类型，是个笼统通用的错误码，服务器发生了什么错误，我们并不知道。</li><li>「<strong>501 Not Implemented</strong>」表示客户端请求的功能还不支持，类似“即将开业，敬请期待”的意思。</li><li>「<strong>502 Bad Gateway</strong>」通常是服务器作为网关或代理时返回的错误码，表示服务器自身工作正常，访问后端服务器发生了错误。</li><li>「<strong>503 Service Unavailable</strong>」表示服务器当前很忙，暂时无法响应客户端，类似“网络服务正忙，请稍后重试”的意思。</li></ul><h2 id="HTTP常见字段"><a href="#HTTP常见字段" class="headerlink" title="HTTP常见字段"></a>HTTP常见字段</h2><p>① Host字段</p><p>将请求发往「同一台」服务器上的不同网站。</p><img src="/posts/undefined/image-20240506144439951.png" class title="如图"><p>② Content-length字段</p><p>本次服务器回应的数据长度是 1000 个字节，后面的字节就属于下一个回应了。</p><p>HTTP协议是基于TCP协议的，这个方法解决了TCP 粘包 的问题</p><p>③ Connection字段</p><p>最常用于客户端要求服务器使用「HTTP 长连接」机制，以便其他请求复用。长连接机制指的是：只要任意一端没有明确提出断开连接，则保持 TCP 连接状态。</p><img src="/posts/undefined/image-20240506144934539.png" class title="如图"><p>④ Content-Type字段</p><p><code>Content-Type</code> 字段用于服务器回应时，告诉客户端，本次数据是什么格式。</p><img src="/posts/undefined/image-20240506145230659.png" class title="如图"><p>上述图片中：</p><p>客户端请求：Accept: * &#x2F; * 代表可以接收任何格式的数据</p><p>服务器端响应： Content-Type : text&#x2F;html;Charset&#x3D;utf-8 代表服务器端响应的数据格式</p><p>⑤ Content-Encoding 字段</p><p><code>Content-Encoding</code> 字段说明数据的压缩方法。表示服务器返回的数据使用了什么压缩格式</p><img src="/posts/undefined/image-20240506145550150.png" class title="如图"><h1 id="GTE和POST"><a href="#GTE和POST" class="headerlink" title="GTE和POST"></a>GTE和POST</h1><h2 id="GET和POST的区别？"><a href="#GET和POST的区别？" class="headerlink" title="GET和POST的区别？"></a>GET和POST的区别？</h2><p>根据RFC规范，</p><p>GET用于从服务器请求资源，请求的参数是写在URL中可见的，并且有长度限制。</p><p>POST用于对服务器的资源进行修改，内容写在报文body中，这个是不可见的。</p><h2 id="GET和POST方式是安全、幂等的嘛？"><a href="#GET和POST方式是安全、幂等的嘛？" class="headerlink" title="GET和POST方式是安全、幂等的嘛？"></a>GET和POST方式是安全、幂等的嘛？</h2><p>安全：请求方法不会破坏服务器上的资源</p><p>幂等：多次执行相同的请求，响应的结果是一致的</p><ul><li>对于RFC的GET和POST请求方式而言，<ul><li>GET是安全、幂等的，所以可以对GET请求的数据进行缓存到本地磁盘上。同时还可以作为书签</li><li>POST是非安全、不幂等的。</li></ul></li></ul><h1 id="HTTP缓存技术"><a href="#HTTP缓存技术" class="headerlink" title="HTTP缓存技术"></a>HTTP缓存技术</h1><p>用于避免发送缓存，对于一些重复性的http请求，直接将【请求-响应】的数据缓存在本地磁盘，下次可以直接读取本地磁盘中的数据。</p><h2 id="强制缓存"><a href="#强制缓存" class="headerlink" title="强制缓存"></a>强制缓存</h2><p>只要浏览器判断本地缓存没有过期，直接使用本地磁盘上的缓存。</p><p>通过设置在HTTP响应头部的2个字段来实现的：Cache-Control(相对时间，优先级高)；Expires（绝对时间）</p><ul><li>当浏览器第一次请求访问服务器资源时，服务器会在返回这个资源的同时，在 Response 头部加上 Cache-Control，Cache-Control 中设置了过期时间大小；</li><li>浏览器再次请求访问服务器中的该资源时，会先<strong>通过请求资源的时间与 Cache-Control 中设置的过期时间大小，来计算出该资源是否过期</strong>，如果没有，则使用该缓存，否则重新请求服务器；</li><li>服务器再次收到请求后，会再次更新 Response 头部的 Cache-Control。</li></ul><h2 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h2><p>服务器端向客户端发送304 的响应，通知客户端可以继续使用本地缓存。</p><p>协商缓存是在强制缓存发现本地缓存已经过期的情况下，开展的。主要流程如下</p><img src="/posts/undefined/image-20240506171152086.png" class title="如图"><h1 id="HTTP和HTTPS"><a href="#HTTP和HTTPS" class="headerlink" title="HTTP和HTTPS"></a>HTTP和HTTPS</h1><h2 id="HTTP和HTTPS有哪些区别？"><a href="#HTTP和HTTPS有哪些区别？" class="headerlink" title="HTTP和HTTPS有哪些区别？"></a>HTTP和HTTPS有哪些区别？</h2><ul><li>HTTP是明文传输，HTTPS在TCP和HTTP之间加了一个SSL&#x2F;TLS安全协议，进行加密传输</li><li>HTTP需要通过TCP三次握手建立连接，而HTTPS除了TCP三次握手后，还要进行SSL&#x2F;TLS的四次握手</li><li>HTTPS协议需要向CA申请数字证书，来保证服务器的身份是可信的</li></ul><h2 id="HTTPS解决了HTTP的哪些问题？"><a href="#HTTPS解决了HTTP的哪些问题？" class="headerlink" title="HTTPS解决了HTTP的哪些问题？"></a>HTTPS解决了HTTP的哪些问题？</h2><ul><li><strong>窃听风险</strong>，比如通信链路上可以获取通信内容</li></ul><p>​<img src="/posts/undefined/image-20240506182200049.png" class title="如图"></p><p>​在通信建立前，采用非对称加密的方式交换会话密钥，后续就不再使用非对称加密</p><p>​在通信过程中全部使用对称加密的会话密钥加密明文数据</p><ul><li><strong>篡改风险</strong>，比如服务器端返回的数据被植入垃圾广告</li></ul><p>​摘要算法（利用哈希运算得到哈希值）+ 数字签名（避免在传输过程中的内容会被替换掉，利用私钥加密、公钥解密）</p><p><img src="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-HTTP/image-20240506184356572.png" alt="image-20240506184356572"></p><ul><li><strong>冒充风险</strong>，比如冒充淘宝网站，用户钱容易没。</li></ul><h1 id="HTTP-1-1-、HTTP-2、-HTTP-3演变"><a href="#HTTP-1-1-、HTTP-2、-HTTP-3演变" class="headerlink" title="HTTP&#x2F;1.1  、HTTP&#x2F;2、 HTTP&#x2F;3演变"></a>HTTP&#x2F;1.1  、HTTP&#x2F;2、 HTTP&#x2F;3演变</h1>]]></content>
+      
+      
+      <categories>
+          
+          <category> 计算机网络 </category>
+          
+          <category> HTTP </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 计算机网络 </tag>
+            
+            <tag> HTTP </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>docker容器卷</title>
       <link href="/posts/e0d41e40.html"/>
       <url>/posts/e0d41e40.html</url>
       
-        <content type="html"><![CDATA[<h1 id><a href="#" class="headerlink" title></a></h1><h1 id="什么是容器卷"><a href="#什么是容器卷" class="headerlink" title="什么是容器卷?"></a>什么是容器卷?</h1><p>卷就是目录或文件，存在于一个或多个容器中，由docker挂载到容器，但不属于联合文件系统，因此能够绕过Union File System提供一些用于持续存储或共享数据的特性：</p><p>卷的设计目的就是<strong>数据的持久化</strong>，完全独立于容器的生存周期，因此Docker不会在容器删除时删除其挂载的数据卷</p><ul><li><p>一句话：有点类似我们Redis里面的rdb和aof文件</p></li><li><p>·将docker容器内的数据保存进宿主机的磁盘中</p></li><li><p>那么如何运行一个带有容器卷存储功能的容器实例？</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run -it --privileged=true -v /宿主机绝对路径目录:/容器内目录   镜像名</span><br></pre></td></tr></table></figure></li></ul><h1 id="容器卷的作用？"><a href="#容器卷的作用？" class="headerlink" title="容器卷的作用？"></a>容器卷的作用？</h1><p>将运用与运行的环境打包镜像，run后形成容器实例运行 ，但是我们对数据的要求希望是持久化的</p><p>Docker容器产生的数据，如果不备份，那么当容器实例删除后，容器内的数据自然也就没有了。</p><p>为了能保存数据，在docker中我们使用卷。</p><p>特点：</p><p>1：数据卷可在容器之间共享或重用数据</p><p>2：卷中的更改可以直接实时生效，爽</p><p>3：数据卷中的更改不会包含在镜像的更新中</p><p>4：数据卷的生命周期一直持续到没有容器使用它为止</p><h1 id="读写规则映射添加说明"><a href="#读写规则映射添加说明" class="headerlink" title="读写规则映射添加说明"></a>读写规则映射添加说明</h1><ul><li><p>默认是<strong>rw</strong></p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run -it --privileged=true -v /宿主机绝对路径目录:/容器内目录:rw   镜像名</span><br></pre></td></tr></table></figure></li><li><p><strong>ro</strong></p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run -it --privileged=true -v /宿主机绝对路径目录:/容器内目录:ro   镜像名</span><br></pre></td></tr></table></figure><p>容器自己只能读取不能写 </p><p>此时如果宿主机写入内容，可以同步给容器内，容器可以读取到。</p></li></ul><h1 id="卷的继承和共享"><a href="#卷的继承和共享" class="headerlink" title="卷的继承和共享"></a>卷的继承和共享</h1><ul><li>容器1完成和宿主机的映射</li></ul><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run -it  --privileged=true -v /mydocker/u:/tmp --name u1 ubuntu</span><br></pre></td></tr></table></figure><ul><li>容器2继承容器1的卷规则</li></ul><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run -it  --privileged=true --volumes-from 父类  --name u2 ubuntu</span><br></pre></td></tr></table></figure><p>注意：这里继承的是规则，代表即使容器1挂了，容器了还是能够和宿主机进行同步的。</p>]]></content>
+        <content type="html"><![CDATA[<h1 id="什么是容器卷"><a href="#什么是容器卷" class="headerlink" title="什么是容器卷?"></a>什么是容器卷?</h1><p>卷就是目录或文件，存在于一个或多个容器中，由docker挂载到容器，但不属于联合文件系统，因此能够绕过Union File System提供一些用于持续存储或共享数据的特性：</p><p>卷的设计目的就是<strong>数据的持久化</strong>，完全独立于容器的生存周期，因此Docker不会在容器删除时删除其挂载的数据卷</p><ul><li><p>一句话：有点类似我们Redis里面的rdb和aof文件</p></li><li><p>·将docker容器内的数据保存进宿主机的磁盘中</p></li><li><p>那么如何运行一个带有容器卷存储功能的容器实例？</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run -it --privileged=true -v /宿主机绝对路径目录:/容器内目录   镜像名</span><br></pre></td></tr></table></figure></li></ul><h1 id="容器卷的作用？"><a href="#容器卷的作用？" class="headerlink" title="容器卷的作用？"></a>容器卷的作用？</h1><p>将运用与运行的环境打包镜像，run后形成容器实例运行 ，但是我们对数据的要求希望是持久化的</p><p>Docker容器产生的数据，如果不备份，那么当容器实例删除后，容器内的数据自然也就没有了。</p><p>为了能保存数据，在docker中我们使用卷。</p><p>特点：</p><p>1：数据卷可在容器之间共享或重用数据</p><p>2：卷中的更改可以直接实时生效，爽</p><p>3：数据卷中的更改不会包含在镜像的更新中</p><p>4：数据卷的生命周期一直持续到没有容器使用它为止</p><h1 id="读写规则映射添加说明"><a href="#读写规则映射添加说明" class="headerlink" title="读写规则映射添加说明"></a>读写规则映射添加说明</h1><ul><li><p>默认是<strong>rw</strong></p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run -it --privileged=true -v /宿主机绝对路径目录:/容器内目录:rw   镜像名</span><br></pre></td></tr></table></figure></li><li><p><strong>ro</strong></p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run -it --privileged=true -v /宿主机绝对路径目录:/容器内目录:ro   镜像名</span><br></pre></td></tr></table></figure><p>容器自己只能读取不能写 </p><p>此时如果宿主机写入内容，可以同步给容器内，容器可以读取到。</p></li></ul><h1 id="卷的继承和共享"><a href="#卷的继承和共享" class="headerlink" title="卷的继承和共享"></a>卷的继承和共享</h1><ul><li>容器1完成和宿主机的映射</li></ul><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run -it  --privileged=true -v /mydocker/u:/tmp --name u1 ubuntu</span><br></pre></td></tr></table></figure><ul><li>容器2继承容器1的卷规则</li></ul><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run -it  --privileged=true --volumes-from 父类  --name u2 ubuntu</span><br></pre></td></tr></table></figure><p>注意：这里继承的是规则，代表即使容器1挂了，容器了还是能够和宿主机进行同步的。</p>]]></content>
       
       
       <categories>
