@@ -1,0 +1,338 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>shell编程 | 沛公共的JAVA学习之旅</title><meta name="author" content="peishusu"><meta name="copyright" content="peishusu"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="shell脚本的学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="shell编程">
+<meta property="og:url" content="http://example.com/posts/e5954c2f.html">
+<meta property="og:site_name" content="沛公共的JAVA学习之旅">
+<meta property="og:description" content="shell脚本的学习">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tse2-mm.cn.bing.net/th/id/OIP-C.h0Ymn-nEuf3mUpLKgfkyqwHaDJ?w=307&h=148&c=7&r=0&o=5&pid=1.7">
+<meta property="article:published_time" content="2024-05-10T02:31:47.000Z">
+<meta property="article:modified_time" content="2024-05-10T04:55:14.055Z">
+<meta property="article:author" content="peishusu">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="shell">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tse2-mm.cn.bing.net/th/id/OIP-C.h0Ymn-nEuf3mUpLKgfkyqwHaDJ?w=307&h=148&c=7&r=0&o=5&pid=1.7"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/posts/e5954c2f.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: peishusu","link":"链接: ","source":"来源: 沛公共的JAVA学习之旅","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'shell编程',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-05-10 12:55:14'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.2.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/loading.gif" data-original="/img/jilaiya.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://tse2-mm.cn.bing.net/th/id/OIP-C.h0Ymn-nEuf3mUpLKgfkyqwHaDJ?w=307&amp;h=148&amp;c=7&amp;r=0&amp;o=5&amp;pid=1.7')"><nav id="nav"><span id="blog-info"><a href="/" title="沛公共的JAVA学习之旅"><span class="site-name">沛公共的JAVA学习之旅</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">shell编程</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-05-10T02:31:47.000Z" title="发表于 2024-05-10 10:31:47">2024-05-10</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-05-10T04:55:14.055Z" title="更新于 2024-05-10 12:55:14">2024-05-10</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/linux/">linux</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/linux/shell/">shell</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>12分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="shell编程"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>🖋 Shell 是一个用 C 语言编写的程序，它是用户使用 Linux 的桥梁。Shell 既是一种命令语言，又是一种程序设计语言。</p>
+<p>🖊 Shell 是指一种应用程序，这个应用程序提供了一个界面，用户通过这个界面访问操作系统内核的服务。</p>
+<p>🖌 Shell 脚本（shell script），是一种为 shell 编写的脚本程序。</p>
+<p>🖍 Shell 编程跟 JavaScript、php 编程一样，只要有一个能编写代码的文本编辑器和一个能解释执行的脚本解释器就可以了。</p>
+<p>📃 Linux 的 Shell 种类众多，常见的有：</p>
+<p>Bourne Shell（&#x2F;usr&#x2F;bin&#x2F;sh或&#x2F;bin&#x2F;sh）<br>Bourne Again Shell（&#x2F;bin&#x2F;bash）  Linux默认使用的<br>C Shell（&#x2F;usr&#x2F;bin&#x2F;csh）<br>K Shell（&#x2F;usr&#x2F;bin&#x2F;ksh）<br>Shell for Root（&#x2F;sbin&#x2F;sh）<br><strong>📃 Linux 提供的 Shell 解析器有</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@Demo ~]$ cat /etc/shells</span><br><span class="line">/bin/sh</span><br><span class="line">/bin/bash</span><br><span class="line">/usr/bin/sh</span><br><span class="line">/usr/bin/bash</span><br><span class="line">/bin/tcsh</span><br><span class="line">/bin/csh</span><br></pre></td></tr></table></figure>
+
+<p><strong>📃 bash 和 sh 的关系</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@Demo bin]$ ll | grep bash</span><br><span class="line">-rwxr-xr-x. 1 root root 941880 5 月 11 2016 bash</span><br><span class="line">lrwxrwxrwx. 1 root root 4 5 月 27 2017 sh -&gt; bash</span><br></pre></td></tr></table></figure>
+
+<p><strong>📃 Centos 默认的解析器是 bash</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@Demo bin]$ echo $SHELL</span><br><span class="line">/bin/bash</span><br></pre></td></tr></table></figure>
+
+<h1 id="编写shell脚本"><a href="#编写shell脚本" class="headerlink" title="编写shell脚本"></a>编写shell脚本</h1><p>脚本以 #!&#x2F;bin&#x2F;bash 开头（指定解析器）</p>
+<p>#! 告诉系统其后路径所指定的程序即是解释此脚本文件的 Shell 程序。</p>
+<p>打开文本编辑器(可以使用 vi&#x2F;vim 命令来创建文件)，新建一个文件 helloworld.sh，扩展名为 sh（sh代表shell），扩展名并不影响脚本执行。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@Demo shells]$ touch helloworld.sh</span><br><span class="line">[root@Demo shells]$ vim helloworld.sh</span><br><span class="line"></span><br><span class="line">// 在 helloworld.sh 中输入如下内容</span><br><span class="line"></span><br><span class="line">#!/bin/bash</span><br><span class="line">echo &quot;helloworld&quot;</span><br></pre></td></tr></table></figure>
+
+<p><code>#!</code> 是一个约定的标记，它告诉系统这个脚本需要什么解释器来执行，即使用哪一种 Shell。</p>
+<p><code>echo</code> 命令用于向窗口输出文本。</p>
+<h1 id="脚本的常用执行方式"><a href="#脚本的常用执行方式" class="headerlink" title="脚本的常用执行方式"></a>脚本的常用执行方式</h1><p><strong>📝 采用 bash 或 sh+脚本的相对路径或绝对路径（不用赋予脚本+x 权限）</strong>,这种执行方法，本质是 bash 解析器帮你执行脚本，所以脚本本身不需要执权限。</p>
+<p>📃 sh+脚本的相对路径</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@Demo shells]$ sh ./helloworld.sh</span><br><span class="line">Helloworld</span><br></pre></td></tr></table></figure>
+
+<p>📃 sh+脚本的绝对路径</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@Demo shells]$ sh /home/shells/helloworld.sh</span><br><span class="line">helloworld</span><br></pre></td></tr></table></figure>
+
+<p>📃 bash+脚本的相对路径</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@Demo shells]$ bash ./helloworld.sh</span><br><span class="line">Helloworld</span><br></pre></td></tr></table></figure>
+
+<p>📃 bash+脚本的绝对路径</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@Demo shells]$ bash /home/shells/helloworld.sh</span><br><span class="line">Helloworld</span><br></pre></td></tr></table></figure>
+
+<p><strong>📝 采用输入脚本的绝对路径或相对路径执行脚本（必须具有可执行权限+x）</strong>,这种执行方法，本质是脚本需要自己执行，所以需要执行权限。</p>
+<p>📃 首先要赋予 helloworld.sh 脚本的+x 权限</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@Demo shells]$ chmod +x helloworld.sh</span><br></pre></td></tr></table></figure>
+
+<p>📃 相对路径</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@Demo shells]$ ./helloworld.sh</span><br><span class="line">Helloworld</span><br></pre></td></tr></table></figure>
+
+<p>📃 绝对路径</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@Demo shells]$ /home/shells/helloworld.sh</span><br><span class="line">Helloworld</span><br></pre></td></tr></table></figure>
+
+<h1 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h1><p>📍 变量类型：运行shell时，会同时存在三种变量：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">👉 局部变量： 局部变量在脚本或命令中定义，仅在当前shell实例中有效，其他shell启动的程序不能访问局部变量。</span><br><span class="line"></span><br><span class="line">👉 环境变量： 所有的程序，包括shell启动的程序，都能访问环境变量，有些程序需要环境变量来保证其正常运行。必要的时候shell脚本也可以定义环境变量。</span><br><span class="line"></span><br><span class="line">👉 shell变量： shell变量是由shell程序设置的特殊变量。shell变量中有一部分是环境变量，有一部分是局部变量，这些变量保证了shell的正常运行。</span><br></pre></td></tr></table></figure>
+
+<p>📍 只读变量：使用 readonly 命令可以将变量定义为只读变量，只读变量的值不能被改变。</p>
+<p>📍 删除变量：使用 unset 命令可以删除变量。变量被删除后不能再次使用。unset 命令不能删除只读变量。</p>
+<p>📍 定义变量时，变量名不加美元符号</p>
+<p>📍 变量名和等号之间不能有空格</p>
+<p>📍 变量名的命名须遵循规则：</p>
+<pre><code>👉 命名只能使用英文字母，数字和下划线，首个字符不能以数字开头。
+
+👉 中间不能有空格，可以使用下划线 _。
+
+👉 不能使用标点符号。
+
+👉 不能使用bash里的关键字（可用help命令查看保留关键字）。
+</code></pre>
+<p>📍 使用一个定义过的变量，只要在变量名前面加美元符号即可。</p>
+<p>📍 变量名外面的花括号是可选的，加不加都行，加花括号是为了帮助解释器识别变量的边界 (推荐给所有变量加上花括号)。</p>
+<p>📍 已定义的变量，可以被重新定义</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">定义变量 A</span></span><br><span class="line">[root@Demo shells]$ A=5</span><br><span class="line">[root@Demo shells]$ echo $A</span><br><span class="line">5</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">给变量 A 重新赋值</span></span><br><span class="line">[root@Demo shells]$ A=8</span><br><span class="line">[root@Demo shells]$ echo $A</span><br><span class="line">8</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">撤销变量 A</span></span><br><span class="line">[root@Demo shells]$ unset A</span><br><span class="line">[root@Demo shells]$ echo $A</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">声明静态的变量 B=2，不能 <span class="built_in">unset</span></span></span><br><span class="line">[root@Demo shells]$ readonly B=2</span><br><span class="line">[root@Demo shells]$ echo $B</span><br><span class="line">2</span><br><span class="line">[root@Demo shells]$ B=9</span><br><span class="line">-bash: B: readonly variable </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">在 bash 中，变量默认类型都是字符串类型，无法直接进行数值运算</span></span><br><span class="line">[root@Demo shells]$ C=1+2</span><br><span class="line">[root@Demo shells]$ echo $C</span><br><span class="line">1+2</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">变量的值如果有空格，需要使用双引号或单引号括起来</span></span><br><span class="line">[root@Demo shells]$ D=I love you</span><br><span class="line">-bash: world: command not found</span><br><span class="line">[root@Demo shells]$ D=&quot;I love you&quot;</span><br><span class="line">[root@Demo shells]$ echo $D</span><br><span class="line">I love you</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">可把变量提升为全局环境变量，可供其他 Shell 程序使用</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">在 helloworld.sh 文件中增加 <span class="built_in">echo</span> <span class="variable">$B</span></span></span><br><span class="line">[root@Demo shells]$ vim helloworld.sh</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line">echo &quot;helloworld&quot;</span><br><span class="line">echo $B</span><br><span class="line"></span><br><span class="line">[root@Demo shells]$ ./helloworld.sh</span><br><span class="line">Helloworld</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">发现并没有打印输出变量 B 的值</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">使用 <span class="built_in">export</span> 变量名</span></span><br><span class="line">[root@Demo shells]$ export B</span><br><span class="line">[root@Demo shells]$ ./helloworld.sh</span><br><span class="line">helloworld</span><br><span class="line">2</span><br></pre></td></tr></table></figure>
+
+<h1 id="SHELL注释"><a href="#SHELL注释" class="headerlink" title="SHELL注释"></a>SHELL注释</h1><p>以 # 开头的行就是注释，会被解释器忽略，通过每一行加一个 # 号设置多行注释。</p>
+<p>多行注释：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">:&lt;&lt;EOF</span><br><span class="line">注释内容...</span><br><span class="line">注释内容...</span><br><span class="line">注释内容...</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+
+<h1 id="SHELL字符串"><a href="#SHELL字符串" class="headerlink" title="SHELL字符串"></a>SHELL字符串</h1><p>字符串是shell编程中最常用最有用的数据类型，字符串可以用单引号，也可以用双引号，也可以不用引号</p>
+<p>单引号：</p>
+<pre><code>👉 单引号里的任何字符都会原样输出，单引号字符串中的变量是无效的；
+
+👉 单引号字串中不能出现单独一个的单引号（对单引号使用转义符后也不行），但可成对出现，作为字符串拼接使用。
+</code></pre>
+<p>双引号</p>
+<pre><code>👉 双引号里可以有变量。
+
+👉 双引号里可以出现转义字符。
+</code></pre>
+<p>📃 拼接字符串</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">your_name=&quot;runoob&quot;</span><br><span class="line"></span><br><span class="line"># 使用双引号拼接,输出结果为：hello, runoob ! hello, runoob !</span><br><span class="line">greeting=&quot;hello, &quot;$your_name&quot; !&quot;</span><br><span class="line">greeting_1=&quot;hello, $&#123;your_name&#125; !&quot;</span><br><span class="line">echo $greeting  $greeting_1</span><br><span class="line"></span><br><span class="line"># 使用单引号拼接,输出结果为：hello, runoob ! hello, $&#123;your_name&#125; !</span><br><span class="line">greeting_2=&#x27;hello, &#x27;$your_name&#x27; !&#x27;</span><br><span class="line">greeting_3=&#x27;hello, $&#123;your_name&#125; !&#x27;</span><br><span class="line">echo $greeting_2  $greeting_3</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>📃 获取字符串长度</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">string=&quot;abcd&quot;</span><br><span class="line">echo $&#123;#string&#125;   # 输出 4</span><br><span class="line"></span><br><span class="line"># 变量为数组时，$&#123;#string&#125; 等价于 $&#123;#string[0]&#125;:</span><br><span class="line"></span><br><span class="line">string=&quot;abcd&quot;</span><br><span class="line">echo $&#123;#string[0]&#125;   # 输出 4</span><br><span class="line"></span><br><span class="line"># 计算字符长度也可是使用 length。</span><br><span class="line">string=&quot;hello,everyone my name is mingming&quot;  # string字符串里边有空格,所以需要添加双引号</span><br><span class="line">expr length &quot;$string&quot;   # 输出:34</span><br><span class="line"></span><br><span class="line"># 使用 expr 命令时，表达式中的运算符左右必须包含空格，如果不包含空格，将会输出表达式本身</span><br><span class="line">expr 5+6     # 直接输出 5+6</span><br><span class="line">expr 5 + 6   # 输出 11</span><br><span class="line"></span><br><span class="line"># 对于某些运算符，还需要我们使用符号&quot;\&quot;进行转义，否则就会提示语法错误</span><br><span class="line">expr 5 * 6       # 输出错误</span><br><span class="line">expr 5 \* 6      # 输出30</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>📃 提取子字符串</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 以下实例从字符串第 2 个字符开始截取 4 个字符</span><br><span class="line">string=&quot;runoob is a great site&quot;</span><br><span class="line">echo $&#123;string:1:4&#125;   # 输出 unoo，下标从0开始的</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>📃 查找子字符串的索引位置</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">查找字符 i 或 o 的位置(哪个字母先出现就计算哪个)</span><br><span class="line">string=&quot;runoob is a great site&quot;</span><br><span class="line">echo `expr index &quot;$string&quot; io`  # 输出 4</span><br></pre></td></tr></table></figure>
+
+<p>📃 字符串截取</p>
+<p>0️⃣ 定义字符串</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">var=http://www.aaa.com/123.htm</span><br></pre></td></tr></table></figure>
+
+<p>1️⃣ <code># </code>号截取，删除左边字符，保留右边字符</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">echo $&#123;var#*//&#125; # 结果是 ：www.aaa.com/123.htm</span><br></pre></td></tr></table></figure>
+
+<p>📎 <code>#</code> 其中 var 是变量名，# 号是运算符，*&#x2F;&#x2F; 表示从左边开始删除第一个 &#x2F;&#x2F; 号及左边的所有字符，即删除 http:&#x2F;&#x2F;</p>
+<p>2️⃣**##** 号截取，删除左边字符，保留右边字符</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">echo $&#123;var##*/&#125; # 结果是 123.htm</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>📎 <code>##*/</code> 表示从左边开始删除最后（最右边）一个 &#x2F; 号及左边的所有字符，即删除 <a target="_blank" rel="noopener" href="http://www.aaa.com/">http://www.aaa.com/</a></p>
+<p>3️⃣ %号截取，删除右边字符，保留左边字符</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">echo $&#123;var%/*&#125; # 结果是：http://www.aaa.com</span><br></pre></td></tr></table></figure>
+
+<p>📎 <code>%/* </code>表示从右边开始，删除第一个 &#x2F; 号及右边的字符</p>
+<p>4️⃣ %% 号截取，删除右边字符，保留左边字符</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">echo $&#123;var%%/*&#125; # 结果是：http:</span><br></pre></td></tr></table></figure>
+
+<p>📎 <code>%%/* </code>表示从右边开始，删除最后（最左边）一个 &#x2F; 号及右边的字符</p>
+<p>5️⃣ 从左边第几个字符开始，及字符的个数</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">echo $&#123;var:0:5&#125; # 结果是：http:</span><br></pre></td></tr></table></figure>
+
+<p>📎 其中的 0 表示左边第一个字符开始，5 表示字符的总个数。</p>
+<p>6️⃣ 从左边第几个字符开始，一直到结束。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">echo $&#123;var:7&#125; # 从第7个个数，结果是 ：www.aaa.com/123.htm</span><br></pre></td></tr></table></figure>
+
+<p>7️⃣ 从右边第几个字符开始，及字符的个数</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">echo $&#123;var:0-7&#125; # 结果是：123.htm</span><br></pre></td></tr></table></figure>
+
+<p>📎 其中的 0-7 表示右边算起第七个字符开始，3 表示字符的个数。</p>
+<p>8️⃣ 从右边第几个字符开始，一直到结束。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">echo $&#123;var:0-7&#125; # 结果是：123.htm</span><br></pre></td></tr></table></figure>
+
+<p>📎 表示从右边第七个字符开始，一直到结束。</p>
+<p>📍 左边的第一个字符是用 0 表示，右边的第一个字符用 0-1 表示。</p>
+<p>📃 read 命令用于获取键盘输入信息</p>
+<p>🔦 它的语法形式一般是：<code>read [-options] [variable...]</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># -p 参数由于设置提示信息</span><br><span class="line">read -p &quot;input a val:&quot; a    #获取键盘输入的 a 变量数字</span><br><span class="line">read -p &quot;input b val:&quot; b    #获取键盘输入的 b 变量数字</span><br><span class="line">r=$[a+b]                    #计算a+b的结果 赋值给r  不能有空格</span><br><span class="line">echo &quot;result = $&#123;r&#125;&quot;        #输出显示结果 r</span><br></pre></td></tr></table></figure>
+
+<h1 id="传递参数"><a href="#传递参数" class="headerlink" title="传递参数"></a>传递参数</h1><p>向脚本传递参数，脚本内获取参数的格式为：$n。n 代表一个数字，其中 $0 为执行的文件名（包含文件路径），1 为执行脚本的第一个参数，2 为执行脚本的第二个参数，以此类推……</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">echo &quot;Shell 传递参数实例！&quot;;</span><br><span class="line">echo &quot;执行的文件名：$0&quot;;</span><br><span class="line">echo &quot;第一个参数为：$1&quot;;</span><br><span class="line">echo &quot;第二个参数为：$2&quot;;</span><br><span class="line">echo &quot;第三个参数为：$3&quot;;</span><br><span class="line"></span><br><span class="line">$ chmod +x test.sh </span><br><span class="line">$ ./test.sh 1 2 3</span><br><span class="line">Shell 传递参数实例！</span><br><span class="line">执行的文件名：./test.sh</span><br><span class="line">第一个参数为：1</span><br><span class="line">第二个参数为：2</span><br><span class="line">第三个参数为：3</span><br></pre></td></tr></table></figure>
+
+<p>参数	说明<br>$#	传递到脚本的参数个数<br>$*	以一个单字符串显示所有向脚本传递的参数。如”$*“用「”」括起来的情况、以”$1 $2 … $n”的形式输出所有参数。<br>$$	脚本运行的当前进程ID号<br>$!	后台运行的最后一个进程的ID号<br>$@	与∗ 相同，但是使用时加引号，并在引号中返回每个参数。如 “ *相同，但是使用时加引号，并在引号中返回每个参数。如”∗相同，但是使用时加引号，并在引号中返回每个参数。如”@“用「”」括起来的情况、以”$1” “2 “ … “ 2” … “2”…”n” 的形式输出所有参数。<br>$-	显示Shell使用的当前选项，与set命令功能相同。<br>$?	显示最后命令的退出状态。0表示没有错误，其他任何值表明有错误。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">echo &quot;Shell 传递参数实例！&quot;;</span><br><span class="line">echo &quot;第一个参数为：$1&quot;;</span><br><span class="line">echo &quot;参数个数为：$#&quot;;</span><br><span class="line">echo &quot;传递的参数作为一个字符串显示：$*&quot;;</span><br><span class="line"></span><br><span class="line">$ chmod +x test.sh </span><br><span class="line">$ ./test.sh 1 2 3</span><br><span class="line">Shell 传递参数实例！</span><br><span class="line">第一个参数为：1</span><br><span class="line">参数个数为：3</span><br><span class="line">传递的参数作为一个字符串显示：1 2 3</span><br></pre></td></tr></table></figure>
+
+<p>**着重说一下 $*与 $@ **</p>
+<p>  👉 都是引用所有参数。</p>
+<p>  👉 只有在双引号中体现出来。假设在脚本运行时写了三个参数 1、2、3，，则 “ * “ 等价于 “1 2 3”（传递了一个参数），而 “@” 等价于 “1” “2” “3”（传递了三个参数）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">echo &quot;-- \$* 演示 ---&quot;</span><br><span class="line">for i in &quot;$*&quot;; do</span><br><span class="line">    echo $i</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line">echo &quot;-- \$@ 演示 ---&quot;</span><br><span class="line">for i in &quot;$@&quot;; do</span><br><span class="line">    echo $i</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line">$ chmod +x test.sh </span><br><span class="line">$ ./test.sh 1 2 3</span><br><span class="line">-- $* 演示 ---</span><br><span class="line">1 2 3</span><br><span class="line">-- $@ 演示 ---</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
+
+<h1 id="SHELL数组"><a href="#SHELL数组" class="headerlink" title="SHELL数组"></a>SHELL数组</h1><p>bash支持<strong>一维数组（不支持多维数组）</strong>，并且<strong>没有限定数组的大小</strong>。</p>
+<p>数组元素的下标<strong>由 0 开始编号</strong>。获取数组中的元素要利用下标，下标可以是整数或算术表达式，其值应大于或等于 0。</p>
+<p>在 Shell 中，用括号来表示数组，数组元素用”空格”符号分割开。定义数组的一般形式为： 数组名&#x3D;(值1 值2 … 值n)</p>
+<p>📃 数组的定义：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">array_name=(value0 value1 value2 value3)</span><br><span class="line"># 或者</span><br><span class="line">array_name=(</span><br><span class="line">value0</span><br><span class="line">value1</span><br><span class="line">value2</span><br><span class="line">value3</span><br><span class="line">)</span><br><span class="line"># 还可以单独定义数组的各个分量。可以不使用连续的下标，而且下标的范围没有限制。</span><br><span class="line">array_name[0]=value0</span><br><span class="line">array_name[1]=value1</span><br><span class="line">array_name[n]=valuen</span><br></pre></td></tr></table></figure>
+
+<p>📃读取数组</p>
+<p>读取数组元素值的一般格式是：<code>$&#123;数组名[下标]&#125;</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">valuen=$&#123;array_name[n]&#125;</span><br><span class="line"></span><br><span class="line"># 使用 @ 符号可以获取数组中的所有元素</span><br><span class="line">echo $&#123;array_name[@]&#125;</span><br></pre></td></tr></table></figure>
+
+<p>📃获取数组的长度</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 获取数组长度的方法与获取字符串长度的方法相同</span><br><span class="line"># 取得数组元素的个数</span><br><span class="line">length=$&#123;#array_name[@]&#125;</span><br><span class="line"># 或者</span><br><span class="line">length=$&#123;#array_name[*]&#125;</span><br><span class="line"># 取得数组单个元素的长度</span><br><span class="line">lengthn=$&#123;#array_name[n]&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>关联数组</strong></p>
+<p>Bash 支持关联数组，可以使用任意的字符串、或者整数作为下标来访问数组元素。关联数组使用 <strong>declare</strong> 命令来声明。</p>
+<p>🔦 <strong>语法格式：</strong><code>declare -A array_name</code></p>
+<ul>
+<li>-A 选项就是用于声明一个关联数组。</li>
+<li>关联数组的键是唯一的。</li>
+</ul>
+<p>📃 创建一个关联数组 site，并创建不同的键值</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">peishusu</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/posts/e5954c2f.html">http://example.com/posts/e5954c2f.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">沛公共的JAVA学习之旅</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/linux/">linux</a><a class="post-meta__tags" href="/tags/shell/">shell</a></div><div class="post_share"><div class="social-share" data-image="https://tse2-mm.cn.bing.net/th/id/OIP-C.h0Ymn-nEuf3mUpLKgfkyqwHaDJ?w=307&amp;h=148&amp;c=7&amp;r=0&amp;o=5&amp;pid=1.7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/posts/b73e5edc.html" title="tree"><img class="cover" src="/img/loading.gif" data-original="https://jsd.012700.xyz/gh/jerryc127/CDN@latest/cover/default_bg2.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">tree</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/9211474f.html" title="linux"><img class="cover" src="/img/loading.gif" data-original="https://tse4-mm.cn.bing.net/th/id/OIP-C.J4MnNNZTbdHXYazhX-4hGAHaEo?w=258&h=180&c=7&r=0&o=5&pid=1.7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-05-08</div><div class="title">linux</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/loading.gif" data-original="/img/jilaiya.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">peishusu</div><div class="author-info__description">做好自己，不要放弃</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/peishusu"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/peishusu" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://www.wolai.com/peigongong/rpJrDcnCTP8wdVcUTdHqKL" target="_blank" title="wolai"><i class="fa fa-book-open"></i></a><a class="social-icon" href="/peishusu@163.com" target="_blank" title="Email"><i class="fas fa-envelope-open-text"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">请关注个人的wolai,内容还未迁移过来</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BC%96%E5%86%99shell%E8%84%9A%E6%9C%AC"><span class="toc-number">2.</span> <span class="toc-text">编写shell脚本</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%84%9A%E6%9C%AC%E7%9A%84%E5%B8%B8%E7%94%A8%E6%89%A7%E8%A1%8C%E6%96%B9%E5%BC%8F"><span class="toc-number">3.</span> <span class="toc-text">脚本的常用执行方式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%98%E9%87%8F"><span class="toc-number">4.</span> <span class="toc-text">变量</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SHELL%E6%B3%A8%E9%87%8A"><span class="toc-number">5.</span> <span class="toc-text">SHELL注释</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SHELL%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">6.</span> <span class="toc-text">SHELL字符串</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BC%A0%E9%80%92%E5%8F%82%E6%95%B0"><span class="toc-number">7.</span> <span class="toc-text">传递参数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SHELL%E6%95%B0%E7%BB%84"><span class="toc-number">8.</span> <span class="toc-text">SHELL数组</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/e5954c2f.html" title="shell编程"><img src="/img/loading.gif" data-original="https://tse2-mm.cn.bing.net/th/id/OIP-C.h0Ymn-nEuf3mUpLKgfkyqwHaDJ?w=307&amp;h=148&amp;c=7&amp;r=0&amp;o=5&amp;pid=1.7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="shell编程"/></a><div class="content"><a class="title" href="/posts/e5954c2f.html" title="shell编程">shell编程</a><time datetime="2024-05-10T02:31:47.000Z" title="发表于 2024-05-10 10:31:47">2024-05-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/b73e5edc.html" title="tree"><img src="/img/loading.gif" data-original="https://jsd.012700.xyz/gh/jerryc127/CDN@latest/cover/default_bg2.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="tree"/></a><div class="content"><a class="title" href="/posts/b73e5edc.html" title="tree">tree</a><time datetime="2024-05-08T12:39:34.000Z" title="发表于 2024-05-08 20:39:34">2024-05-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/9211474f.html" title="linux"><img src="/img/loading.gif" data-original="https://tse4-mm.cn.bing.net/th/id/OIP-C.J4MnNNZTbdHXYazhX-4hGAHaEo?w=258&amp;h=180&amp;c=7&amp;r=0&amp;o=5&amp;pid=1.7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="linux"/></a><div class="content"><a class="title" href="/posts/9211474f.html" title="linux">linux</a><time datetime="2024-05-08T08:13:27.000Z" title="发表于 2024-05-08 16:13:27">2024-05-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/11b561ff.html" title="dockerfile的讲解"><img src="/img/loading.gif" data-original="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="dockerfile的讲解"/></a><div class="content"><a class="title" href="/posts/11b561ff.html" title="dockerfile的讲解">dockerfile的讲解</a><time datetime="2024-05-08T00:57:48.000Z" title="发表于 2024-05-08 08:57:48">2024-05-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/7b209e6f.html" title="algrothrim/tree"><img src="/img/loading.gif" data-original="https://tse2-mm.cn.bing.net/th/id/OIP-C.PzRBvzIe0IC-ZBIQ9bwMKwHaD4?w=345&amp;h=180&amp;c=7&amp;r=0&amp;o=5&amp;pid=1.7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="algrothrim/tree"/></a><div class="content"><a class="title" href="/posts/7b209e6f.html" title="algrothrim/tree">algrothrim/tree</a><time datetime="2024-05-07T11:30:53.000Z" title="发表于 2024-05-07 19:30:53">2024-05-07</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2024 By peishusu</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my <a target="_blank" rel="noopener" href="https://shenpeilovejilaiya.cn/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/click-show-text.min.js" data-mobile="true" data-text="I,LOVE,YOU" data-fontsize="15px" data-random="true" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.13.0"></script></div></div>
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body></html>
